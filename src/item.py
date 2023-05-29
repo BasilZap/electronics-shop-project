@@ -1,7 +1,7 @@
 import csv
 
 
-CSV_FILE_PATH = '../src/items.csv'
+CSV_FILE_PATH = './src/items.csv'
 
 class Item:
     """

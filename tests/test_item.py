@@ -1,4 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import pytest
+
 from src.item import *
 
 obj1 = Item('Планшет', 10000, 2)
@@ -28,3 +30,26 @@ def test_apply_discount():
 
     obj2.apply_discount()
     assert obj2.price == 4000.0
+
+
+# TestCase2
+
+def test_name_setter():
+    obj1.name = 'Notebook'
+    assert obj1.name == 'Notebook'
+
+
+def test_name_setter__more_10_symbols():
+    with pytest.raises(Exception):
+        obj1.name = 'NotebookSony'
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
+    assert Item.all[0].name == 'Смартфон'
+    assert Item.all[1].price == '1000'
+
+
+def test_def_string_to_number():
+    assert Item.string_to_number('5.2') == 5
