@@ -3,13 +3,18 @@ import pytest
 
 from src.item import *
 
+# Создание экземпляров класса Item
 obj1 = Item('Планшет', 10000, 2)
 obj2 = Item('Телефон', 5000, 100)
 
+# Задаем кофициенты повышения ЗП
 obj1.pay_rate = 0.5
 obj2.pay_rate = 0.8
 
+# TestCase1
 
+
+# Проверяем, что класс создан
 def test_create_class():
     assert obj1.name == 'Планшет'
     assert obj1.price == 10000
@@ -19,11 +24,13 @@ def test_create_class():
     assert obj2.quantity == 100
 
 
+# Тест метода calculate_total_price
 def test_calculate_total_price():
     assert obj1.calculate_total_price() == 20000.0
     assert obj2.calculate_total_price() == 500000.0
 
 
+# Тест метода apply_discount
 def test_apply_discount():
     obj1.apply_discount()
     assert obj1.price == 5000.0
@@ -33,17 +40,19 @@ def test_apply_discount():
 
 
 # TestCase2
-
+# Проверка сеттера атрибута name
 def test_name_setter():
     obj1.name = 'Notebook'
     assert obj1.name == 'Notebook'
 
 
+# Проверка при задании name более 10 символов
 def test_name_setter__more_10_symbols():
     with pytest.raises(Exception):
         obj1.name = 'NotebookSony'
 
 
+# Проверка работы класс-метода instantiate_from_csv
 def test_instantiate_from_csv():
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
@@ -51,5 +60,6 @@ def test_instantiate_from_csv():
     assert Item.all[1].price == '1000'
 
 
-def test_def_string_to_number():
+# Проверка работы статик-метода string_to_number
+def test_string_to_number():
     assert Item.string_to_number('5.2') == 5

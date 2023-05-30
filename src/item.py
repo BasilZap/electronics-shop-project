@@ -29,6 +29,9 @@ class Item:
 
     @name.setter
     def name(self, new_name: str):
+        """
+        Сеттер атрибута name с проверкой длины имени
+        """
         if 10 >= len(new_name):
             self.__name = new_name
         else:
@@ -36,6 +39,9 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        """
+        Инициализирует экземпляры класса `Item` данными из файла src/items.csv
+        """
         cls.all.clear()
         with open(CSV_FILE_PATH, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -44,6 +50,9 @@ class Item:
 
     @staticmethod
     def string_to_number(some_number: str) -> int:
+        """
+        Возвращение заданного числа в формате int
+        """
         return int(float(some_number))
 
     def calculate_total_price(self) -> float:
