@@ -6,6 +6,7 @@ from src.item import *
 # Создание экземпляров класса Item
 obj1 = Item('Планшет', 10000, 2)
 obj2 = Item('Телефон', 5000, 100)
+obj3 = Item('SSD', 5000, 3)
 
 # Задаем кофициенты повышения ЗП
 obj1.pay_rate = 0.5
@@ -63,3 +64,15 @@ def test_instantiate_from_csv():
 # Проверка работы статик-метода string_to_number
 def test_string_to_number():
     assert Item.string_to_number('5.2') == 5
+
+
+# TestCase3
+# Проверка метода repr
+def test_repr():
+    assert repr(obj3) == "Item('SSD', 5000, 3)"
+
+
+# Проверка метода str
+def test_str():
+    assert str(obj3) == 'SSD'
+
