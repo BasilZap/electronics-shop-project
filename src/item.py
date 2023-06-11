@@ -25,10 +25,25 @@ class Item:
         self.all = self.all.append(self)
 
     def __repr__(self):
+        """
+        Переопределение метода repr
+        """
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
     def __str__(self):
+        """
+        Переопределение метода str
+        """
         return f"{self.__name}"
+
+    def __add__(self, other):
+        """
+        Переопределение метода add для класса Item
+        """
+        if isinstance(other, Item):
+            ret_val = self.quantity + other.quantity
+            return ret_val
+        return None
 
     @property
     def name(self):
