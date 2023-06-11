@@ -30,6 +30,11 @@ class Item:
     def __str__(self):
         return f"{self.__name}"
 
+    def __add__(self, other):
+        if issubclass(other, Item):
+            ret_val = self.quantity + other.quantity
+            return ret_val
+
     @property
     def name(self):
         return self.__name
