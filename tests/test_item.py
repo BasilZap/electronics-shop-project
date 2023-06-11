@@ -2,6 +2,7 @@
 import pytest
 
 from src.item import *
+from src.phone import Phone
 
 # Создание экземпляров класса Item
 obj1 = Item('Планшет', 10000, 2)
@@ -11,6 +12,7 @@ obj3 = Item('SSD', 5000, 3)
 # Задаем кофициенты повышения ЗП
 obj1.pay_rate = 0.5
 obj2.pay_rate = 0.8
+
 
 # TestCase1
 
@@ -76,3 +78,13 @@ def test_repr():
 def test_str():
     assert str(obj3) == 'SSD'
 
+
+# TestCase4 - Тестирование метода add
+
+obj_phone = Phone('Телефон', 10000, 4, 2)   # Создаем экземпляр класса Phone
+
+
+def test_add():
+    assert obj1 + obj2 == 102
+    assert obj1 + obj_phone == 6
+    assert obj2 + 5 is None
