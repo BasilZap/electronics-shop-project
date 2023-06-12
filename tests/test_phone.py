@@ -1,3 +1,4 @@
+import pytest
 from src.phone import Phone
 
 # TestCase4
@@ -18,3 +19,16 @@ def test_init_phone():
 # Тестируем метод repr класса Phone
 def test_repr_phone():
     assert repr(obj_phone2) == "Phone('Nokia', 1000, 200, 1)"
+
+
+# Тестируем сеттер количества сим-карт класса Phone
+def test_number_of_sim():
+    obj_phone2.number_of_sim = 2
+    assert obj_phone2.number_of_sim == 2
+
+
+# Тестируем проверку количества сим-карт класса Phone
+def test_number_of_sim__more_0():
+    with pytest.raises(Exception):
+        obj_phone1.number_of_sim = 0
+
