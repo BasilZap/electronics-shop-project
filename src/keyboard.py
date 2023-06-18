@@ -1,20 +1,31 @@
 from src.item import Item
 
 
+# Создание класса Mixin
 class Mixin:
+    Language = "EN"
 
-    def __init__(self, name, price, quantity, language):
-        super().__init__(name, price, quantity)
-        self.language = language
+# Конструктор класса
+    def __init__(self):
+        self.__language = self.Language
+
+    @property
+    def language(self):
+        return self.__language
 
     def change_lang(self):
-        if self.language == "EN":
-            self.language = "RU"
+        """
+        Функция класса Mixin, которая изменяет раскладку
+        клавиатуры и возвращает класс Mixin с изменениями
+        """
+        if self.__language == "EN":
+            self.__language = "RU"
         else:
-            self.language = "EN"
+            self.__language = "EN"
+        return self
 
 
-class Keyboard(Mixin, Item):
-    def __init__(self, name, price, quantity, language="EN"):
-        super().__init__(name, price, quantity, language)
+# Объявление класса клавиатуры
+class Keyboard(Item, Mixin):
+    pass
 
