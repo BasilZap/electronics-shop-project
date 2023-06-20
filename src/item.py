@@ -1,6 +1,6 @@
 import csv
 
-CSV_FILE_PATH = '../src/items.csv'
+CSV_FILE_PATH = 'C:/Users/user/PycharmProjects/electronics-shop-project/src/items.csv'
 
 
 # Объявление класса исключения для проверки csv-файла
@@ -69,13 +69,13 @@ class Item:
             raise Exception('Длина наименования товара превышает 10 символов')
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, file_path=CSV_FILE_PATH):
         """
         Инициализирует экземпляры класса `Item` данными из файла src/items.csv
         """
         cls.all.clear()
         try:
-            with open(CSV_FILE_PATH, newline='') as csvfile:
+            with open(file_path, newline='') as csvfile:
                 reader = csv.DictReader(csvfile)
                 if reader.fieldnames != ['name', 'price', 'quantity']:
                     raise InstantiateCSVError
