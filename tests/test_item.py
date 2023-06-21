@@ -88,3 +88,22 @@ def test_add():
     assert obj1 + obj2 == 102
     assert obj1 + obj_phone == 6
     assert obj2 + 5 is None
+
+
+# TestCase6 - конструктор класса исключения
+def test_instantiate_csv_error():
+    icsv = InstantiateCSVError()
+    assert icsv.message == "InstantiateCSVError: Файл item.csv поврежден"
+    assert str(icsv) == "InstantiateCSVError: Файл item.csv поврежден"
+
+
+# Отработка исключения отсутствия файла
+def test_instantiate_csv_error__missing_file():
+    with pytest.raises(Exception):
+        assert Item.instantiate_from_csv('missing_file')
+
+
+# Отработка исключения поврежденного файла
+def test_instantiate_csv_error__bad_file():
+    with pytest.raises(Exception):
+        assert Item.instantiate_from_csv('C:/Users/user/PycharmProjects/electronics-shop-project/tests/items_bad.csv')

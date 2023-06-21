@@ -1,7 +1,15 @@
 import csv
 
+CSV_FILE_PATH = 'C:/Users/user/PycharmProjects/electronics-shop-project/src/items.csv'
 
-CSV_FILE_PATH = './src/items.csv'
+
+# Объявление класса исключения для проверки csv-файла
+class InstantiateCSVError(Exception):
+    def __init__(self):
+        self.message = "InstantiateCSVError: Файл item.csv поврежден"
+
+    def __str__(self):
+        return self.message
 
 
 class Item:
@@ -61,15 +69,25 @@ class Item:
             raise Exception('Длина наименования товара превышает 10 символов')
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, file_path=CSV_FILE_PATH):
         """
         Инициализирует экземпляры класса `Item` данными из файла src/items.csv
         """
         cls.all.clear()
-        with open(CSV_FILE_PATH, newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                cls(row['name'], row['price'], row['quantity'])
+        try:
+            with open(file_path, newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                if reader.fieldnames != ['name', 'price', 'quantity']:
+                    raise InstantiateCSVError
+                else:
+                    for row in reader:
+                        cls(row['name'], row['price'], row['quantity'])
+
+        except InstantiateCSVError:
+            print(InstantiateCSVError())
+        except FileNotFoundError:
+            print('FileNotFoundError: Отсутствует файл item.csv')
+
 
     @staticmethod
     def string_to_number(some_number: str) -> int:
